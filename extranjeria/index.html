@@ -135,6 +135,8 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
 .check { display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--muted); margin-top:14px; }
 .check input { width:20px; height:20px; margin-top:1px; accent-color:var(--red); }
 .sent { text-align:center; padding:10px 0; }
+.sent span { display:block; }
+.sent .btn { text-decoration:none; }
 .sent b { color:var(--ok); font-size:18px; display:block; margin-bottom:4px; }
 .demo { font-size:12px; color:var(--muted); text-align:center; padding:4px 22px 10px; }
 
@@ -326,9 +328,9 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
         <label class="field">Mensaje (opcional)<textarea id="f-msg" placeholder="Cuéntanos qué necesitas"></textarea></label>
         <label class="check"><input type="checkbox" id="f-ok"> Acepto que Nil Aznar, agente exclusivo de Occident, me contacte para darme información sobre seguros.</label>
         <p id="f-err" class="note warn" hidden></p>
-        <button class="btn" type="submit">Enviar</button>
+        <button class="btn" type="submit">Enviar por WhatsApp</button>
       </form>
-      <div id="sent" class="sent" hidden><b>¡Gracias! Te contactamos muy pronto.</b></div>
+      <div id="sent" class="sent" hidden><b>¡Gracias! Te contactamos muy pronto.</b><span class="muted">Se ha abierto WhatsApp con tus datos. Pulsa enviar en WhatsApp para que nos llegue.</span><a class="btn ghost" id="wa-again" href="#" target="_blank" rel="noopener">Abrir WhatsApp otra vez</a></div>
     </div>
   </details>
 
@@ -338,8 +340,8 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
       <p class="muted" style="margin:0">Todavía no hay valoraciones. Si ya eres cliente, cuéntanos qué tal te hemos atendido.</p>
       <div class="stars" id="stars" role="group" aria-label="Tu valoración"><button type="button" aria-label="1 estrella">★</button><button type="button" aria-label="2 estrellas">★</button><button type="button" aria-label="3 estrellas">★</button><button type="button" aria-label="4 estrellas">★</button><button type="button" aria-label="5 estrellas">★</button></div>
       <label class="field">Tu opinión (opcional)<textarea id="v-txt" placeholder="Escribe tu opinión"></textarea></label>
-      <button class="btn ghost" type="button" id="v-go">Enviar valoración</button>
-      <p id="v-ok" class="note ok" hidden><b>¡Gracias por tu valoración!</b></p>
+      <button class="btn ghost" type="button" id="v-go">Enviar valoración por WhatsApp</button>
+      <p id="v-ok" class="note ok" hidden><b>¡Gracias por tu valoración!</b> Pulsa enviar en WhatsApp para que nos llegue.</p>
     </div>
   </details>
 
@@ -468,7 +470,12 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
   /* Valoraciones (simulado) */
   var stars = document.querySelectorAll('#stars button'), rating = 0;
   stars.forEach(function (b, i) { b.addEventListener('click', function () { rating = i + 1; stars.forEach(function (x, j) { x.classList.toggle('on', j < rating); }); }); });
-  $('v-go').addEventListener('click', function () { if (!rating) { stars[0].focus(); return; } $('v-ok').hidden = false; $('v-go').hidden = true; });
+  $('v-go').addEventListener('click', function () {
+    if (!rating) { stars[0].focus(); return; }
+    var t = 'Hola Nil, te dejo mi valoración desde Extranjería App: ' + rating + ' de 5 estrellas.' + ($('v-txt').value.trim() ? '\n' + $('v-txt').value.trim() : '');
+    $('v-ok').hidden = false; $('v-go').hidden = true;
+    window.location.href = 'https://wa.me/34659706974?text=' + encodeURIComponent(t);
+  });
 
   /* Formulario (simulado) */
   $('form').addEventListener('submit', function (e) {
@@ -480,7 +487,19 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
     if (!$('f-edad').value) err.push('tu edad');
     if (!$('f-ok').checked) err.push('aceptar que te contacte');
     if (err.length) { $('f-err').hidden = false; $('f-err').textContent = 'Falta ' + err.join(', ') + '.'; return; }
+    var sel = function (id) { var o = $(id); return o.value === '' ? '-' : o.options[o.selectedIndex].text; };
+    var seg = [].map.call(document.querySelectorAll('#f-seg input:checked'), function (i) { return i.value; }).join(', ');
+    var txt = 'Hola Nil, vengo de Extranjería App y quiero un presupuesto.\n\n' +
+      'Nombre: ' + $('f-nombre').value.trim() + '\n' +
+      'Teléfono: ' + $('f-tel').value.trim() + '\n' +
+      'Documento: ' + sel('f-doc') + '\n' +
+      'Edad: ' + sel('f-edad') + '\n' +
+      'Seguros: ' + seg +
+      ($('f-msg').value.trim() ? '\nMensaje: ' + $('f-msg').value.trim() : '');
+    var url = 'https://wa.me/34659706974?text=' + encodeURIComponent(txt);
+    $('wa-again').href = url;
     $('form').hidden = true; $('sent').hidden = false;
+    window.location.href = url;
   });
 })();
 </script>
