@@ -366,8 +366,8 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
       <p class="muted" style="margin:0">Todavía no hay valoraciones. Si ya eres cliente, cuéntanos qué tal te hemos atendido.</p>
       <div class="stars" id="stars" role="group" aria-label="Tu valoración"><button type="button" aria-label="1 estrella">★</button><button type="button" aria-label="2 estrellas">★</button><button type="button" aria-label="3 estrellas">★</button><button type="button" aria-label="4 estrellas">★</button><button type="button" aria-label="5 estrellas">★</button></div>
       <label class="field">Tu opinión (opcional)<textarea id="v-txt" placeholder="Escribe tu opinión"></textarea></label>
-      <button class="btn ghost" type="button" id="v-go">Enviar valoración por WhatsApp</button>
-      <p id="v-ok" class="note ok" hidden><b>¡Gracias por tu valoración!</b> Pulsa enviar en WhatsApp para que nos llegue.</p>
+      <button class="btn ghost" type="button" id="v-go">Enviar valoración</button>
+      <p id="v-ok" class="note ok" hidden><b>¡Gracias por tu valoración!</b></p>
     </div>
   </details>
 
@@ -508,9 +508,7 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
   stars.forEach(function (b, i) { b.addEventListener('click', function () { rating = i + 1; stars.forEach(function (x, j) { x.classList.toggle('on', j < rating); }); }); });
   $('v-go').addEventListener('click', function () {
     if (!rating) { stars[0].focus(); return; }
-    var t = 'Hola Nil, te dejo mi valoración desde Extranjería App: ' + rating + ' de 5 estrellas.' + ($('v-txt').value.trim() ? '\n' + $('v-txt').value.trim() : '');
     $('v-ok').hidden = false; $('v-go').hidden = true;
-    window.location.href = 'https://wa.me/34659706974?text=' + encodeURIComponent(t);
   });
 
   /* Formulario */
