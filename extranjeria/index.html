@@ -60,6 +60,9 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
 .stars button { border:0; background:none; font-size:30px; line-height:1; color:#d4d4d8; cursor:pointer; padding:0; }
 .stars button.on { color:var(--gold); }
 
+.promo { border:1.5px dashed var(--red); background:var(--red-tint); }
+.promo strong { color:var(--red); font-size:16px; display:block; margin-bottom:4px; }
+
 /* Botones de acción */
 .actions { display:grid; grid-template-columns:1fr 1fr; gap:10px 9px; padding:18px 14px 4px; }
 .act { display:flex; align-items:center; justify-content:center; gap:9px; background:#fff; border-radius:14px; padding:12px 10px; font-weight:600; font-size:15px; text-decoration:none; box-shadow:0 1px 3px #0000000f; border:0; cursor:pointer; }
@@ -122,7 +125,17 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
 .seg em { font-style:normal; font-size:10px; color:var(--ok); font-weight:700; }
 .seg input:checked + span { border-color:var(--red); background:var(--red-tint); color:var(--red); }
 .seg input:focus-visible + span { outline:2px solid var(--blue); }
-#cop-info { margin-top:10px; }
+#cop-info, .pbox { margin-top:10px; }
+.step-h { display:flex; align-items:center; gap:10px; margin-top:18px; font-weight:700; font-size:16px; }
+.step-h span { width:26px; height:26px; border-radius:50%; background:var(--red); color:#fff; display:grid; place-items:center; font-size:14px; flex:none; }
+.res-t { margin:0; color:var(--red); font-size:17px; }
+.result { gap:10px; }
+.line.pick { cursor:pointer; align-items:center; }
+.line.pick input { width:20px; height:20px; accent-color:var(--red); flex:none; }
+.line.pick span { flex:1; }
+.line b small { font-size:12px; color:var(--muted); font-weight:600; }
+#f-calc ul { margin:6px 0 8px; padding-left:18px; }
+#f-calc-body { margin-top:4px; }
 .line { display:flex; justify-content:space-between; gap:10px; align-items:baseline; padding:6px 0; border-top:1px solid var(--line); font-size:14px; }
 .line:first-child { border-top:0; }
 .line b { color:var(--red); font-size:18px; white-space:nowrap; }
@@ -195,17 +208,15 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
     </div>
   </details>
 
-  <details class="card acc">
-    <summary><span class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-1.5-3-5-3.5-5-1.2C7 9 12 9 12 9Zm0 0c1.5-3 5-3.5 5-1.2C17 9 12 9 12 9Z"/></svg></span><h3>Descuento especial para usuarios de Extranjería App</h3><span class="plus" aria-hidden="true"></span></summary>
-    <div class="acc-body">
-      <p style="margin:0">Dinos que vienes de la app y te aplicamos condiciones especiales.</p>
-    </div>
-  </details>
+  <section class="card promo">
+    <strong>🎁 Descuento especial para usuarios de Extranjería App</strong>
+    <p style="margin:0">Dinos que vienes de la app y te aplicamos condiciones especiales.</p>
+  </section>
 
   <details class="card acc" id="docs">
     <summary><span class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12 2.2 2.2 4.4-4.4"/></svg></span><h3>¿Qué seguros puedes contratar?</h3><span class="plus" aria-hidden="true"></span></summary>
     <div class="acc-body">
-      <p class="muted" style="margin:0">Depende de tu documentación. Selecciona tu situación:</p>
+      <p class="muted" style="margin:0">Dependiendo de tu documentación, podrás contratar unos seguros u otros.</p>
       <label class="field">¿Qué documento tienes?
         <select id="doc">
           <option value="">Selecciona una opción</option>
@@ -219,7 +230,7 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
       <details class="ins" data-k="salud" data-sin-nie>
         <summary><span class="ico">🩺</span><span class="t"><strong>Seguro de salud</strong><small>El que te piden para el visado o la residencia</small></span><span class="badge"></span><span class="plus" aria-hidden="true"></span></summary>
         <div class="body">Médico privado en España: especialistas, pruebas, hospital y urgencias.
-          <ul><li><b>Sin NIE:</b> puedes contratarlo sin copagos con tu pasaporte, tu autorización de residencia o el NIE provisional. Solo tendrás que presentarnos el NIE en un plazo máximo de 4 meses</li><li><b>Con NIE:</b> puedes elegir con o sin copagos</li></ul>
+          <ul><li><b>Sin NIE:</b> si todavía no tienes el NIE, solo podrás contratar la modalidad sin copagos y tienes 4 meses para presentar el NIE</li><li><b>Con NIE:</b> puedes elegir con o sin copagos</li></ul>
           <p class="sub"><b>Sin copagos:</b> es el seguro completo. Pagas tu cuota mensual y no pagas nada más cuando vas al médico.</p>
           <p class="sub"><b>Con copagos:</b> pagas una cuota mensual más baja y una cantidad pequeña por cada visita o prueba, que se te carga en el recibo del mes.</p></div>
       </details>
@@ -254,8 +265,10 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
   </details>
 
   <details class="card acc" id="calc">
-    <summary><span class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11.5h.01M12 11.5h.01M16 11.5h.01M8 15h.01M12 15h.01M16 15h.01M8 18.3h.01M12 18.3h.01M16 18.3h.01"/></svg></span><h3>Calculadora de precio orientativo</h3><span class="plus" aria-hidden="true"></span></summary>
+    <summary><span class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11.5h.01M12 11.5h.01M16 11.5h.01M8 15h.01M12 15h.01M16 15h.01M8 18.3h.01M12 18.3h.01M16 18.3h.01"/></svg></span><h3>Calculadora de precios</h3><span class="plus" aria-hidden="true"></span></summary>
     <div class="acc-body">
+      <p style="margin:0">¡Adelante! Ya puedes hacer una simulación de tu presupuesto orientativo en 2 pasos.</p>
+      <div class="step-h"><span>1</span>Selecciona tus seguros</div>
       <label class="field">¿Qué documento tienes?
         <select id="c-doc"><option value="">Selecciona tu documento</option><option value="nie">DNI / NIE / TIE</option><option value="tramite">NIE provisional o en trámite</option><option value="pasaporte">Solo pasaporte</option></select>
       </label>
@@ -272,6 +285,7 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
       <div id="c-opts" class="opts" hidden>
         <div class="opt" data-k="saludsin" data-sin>
           <label class="ck"><input type="checkbox" value="saludsin"> <span><b>Seguro de salud sin copagos</b><small>Pago anual</small></span></label>
+          <div class="sub-opts"><p class="note ok pbox" data-p="saludsin"></p></div>
         </div>
         <div class="opt" data-k="salud" data-nie>
           <label class="ck"><input type="checkbox" value="salud"> <span><b>Seguro de salud</b><small>Elige la modalidad de copago</small></span></label>
@@ -281,36 +295,40 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
               <label><input type="radio" name="cop" value="5"><span>Copago 5</span></label>
               <label><input type="radio" name="cop" value="20" checked><span>Copago 20 <em>Recomendado</em></span></label>
             </div>
-            <p class="note ok" id="cop-info"></p>
+            <p class="note ok pbox" id="cop-info" data-p="salud"></p>
           </div>
         </div>
         <div class="opt" data-k="decesos" data-nie>
           <label class="ck"><input type="checkbox" value="decesos"> <span><b>Decesos con repatriación</b><small>Elige el país de repatriación</small></span></label>
-          <div class="sub-opts"><label class="field">País de repatriación<select id="c-pais"><option>Marruecos</option><option>Argelia</option><option>Rumanía</option><option>Ucrania</option><option>Colombia</option><option>Venezuela</option><option>Perú</option><option>Ecuador</option><option>Bolivia</option><option>Paraguay</option><option>Argentina</option><option>Honduras</option><option>Nicaragua</option><option>República Dominicana</option><option>Cuba</option><option>Brasil</option><option>Senegal</option><option>Gambia</option><option>Mali</option><option>Nigeria</option><option>Pakistán</option><option>India</option><option>China</option><option>Otro país</option></select></label></div>
+          <div class="sub-opts"><label class="field">País de repatriación<select id="c-pais"><option>Marruecos</option><option>Argelia</option><option>Rumanía</option><option>Ucrania</option><option>Colombia</option><option>Venezuela</option><option>Perú</option><option>Ecuador</option><option>Bolivia</option><option>Paraguay</option><option>Argentina</option><option>Honduras</option><option>Nicaragua</option><option>República Dominicana</option><option>Cuba</option><option>Brasil</option><option>Senegal</option><option>Gambia</option><option>Mali</option><option>Nigeria</option><option>Pakistán</option><option>India</option><option>China</option><option>Otro país</option></select></label><p class="note ok pbox" data-p="decesos"></p></div>
         </div>
         <div class="opt" data-k="vida" data-nie>
           <label class="ck"><input type="checkbox" value="vida"> <span><b>Seguro de vida</b><small>Capital por fallecimiento</small></span></label>
-          <div class="sub-opts"><label class="field">Capital por fallecimiento<select id="c-cap"><option value="30000">30.000 €</option><option value="50000">50.000 €</option><option value="75000">75.000 €</option><option value="100000">100.000 €</option><option value="150000">150.000 €</option><option value="200000">200.000 €</option></select></label></div>
+          <div class="sub-opts"><label class="field">Capital por fallecimiento<select id="c-cap"><option value="30000">30.000 €</option><option value="50000">50.000 €</option><option value="75000">75.000 €</option><option value="100000">100.000 €</option><option value="150000">150.000 €</option><option value="200000">200.000 €</option></select></label><p class="note ok pbox" data-p="vida"></p></div>
         </div>
         <div class="opt" data-k="hogar" data-nie>
           <label class="ck"><input type="checkbox" value="hogar"> <span><b>Seguro de hogar</b><small>Tu vivienda</small></span></label>
-          <div class="sub-opts"><label class="field">Código postal de la vivienda<input id="c-cp-hogar" inputmode="numeric" maxlength="5" placeholder="08302"></label></div>
+          <div class="sub-opts"><label class="field">Código postal de la vivienda<input id="c-cp-hogar" inputmode="numeric" maxlength="5" placeholder="08302"></label><p class="note ok pbox" data-p="hogar"></p></div>
         </div>
         <div class="opt" data-k="negocio" data-nie>
           <label class="ck"><input type="checkbox" value="negocio"> <span><b>Seguro para negocio</b><small>Tu local o actividad</small></span></label>
-          <div class="sub-opts"><label class="field">Código postal del negocio<input id="c-cp-neg" inputmode="numeric" maxlength="5" placeholder="08302"></label></div>
+          <div class="sub-opts"><label class="field">Código postal del negocio<input id="c-cp-neg" inputmode="numeric" maxlength="5" placeholder="08302"></label><p class="note ok pbox" data-p="negocio"></p></div>
         </div>
         <div class="opt" data-k="auto" data-nie>
           <label class="ck"><input type="checkbox" value="auto"> <span><b>Seguro de automóvil</b><small>Elige la cobertura</small></span></label>
-          <div class="sub-opts"><label class="field">Cobertura<select id="c-auto"><option value="t">Terceros</option><option value="ta">Terceros ampliado</option><option value="tr">Todo riesgo</option></select></label></div>
+          <div class="sub-opts"><label class="field">Cobertura<select id="c-auto"><option value="t">Terceros</option><option value="ta">Terceros ampliado</option><option value="tr">Todo riesgo</option></select></label><p class="note ok pbox" data-p="auto"></p></div>
         </div>
       </div>
-      <div class="result" id="c-res" aria-live="polite" hidden>
-        <span class="lbl">Tu precio aproximado</span>
-        <div id="r-lines"></div>
-        <span class="fine">* Precio orientativo aproximado.</span>
+      <div id="paso2" hidden>
+        <div class="step-h"><span>2</span>Elige tus seguros para un presupuesto sin compromiso</div>
+        <div class="result" id="c-res" aria-live="polite">
+          <h4 class="res-t">Resumen aproximado de tus seguros</h4>
+          <p class="note ok" style="margin:0">Aquí tienes tu resumen. Elige los que quieras y procedemos a enviarte un presupuesto definitivo sin compromiso.</p>
+          <div id="r-lines"></div>
+          <span class="fine">* Precio orientativo aproximado.</span>
+        </div>
+        <button class="btn" type="button" id="c-go">Contactar</button>
       </div>
-      <div class="note ok">Si te encaja, entra en <a href="#contacto" id="c-go" style="color:var(--red);font-weight:700">Contactar</a> y te damos el presupuesto exacto.</div>
     </div>
   </details>
 
@@ -318,6 +336,8 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
     <summary><span class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 3.5V16H4Z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span><h3>Contactar</h3><span class="plus" aria-hidden="true"></span></summary>
     <div class="acc-body">
       <form id="form" novalidate>
+        <div id="f-calc" class="note ok" hidden><b>Tu selección de la calculadora</b><div id="f-calc-body"></div><a href="#calc" id="f-edit" style="color:var(--red);font-weight:700">Modificar en la calculadora</a></div>
+        <div id="f-manual">
         <label class="field">¿Qué documento tienes?
           <select id="f-doc"><option value="">Selecciona tu documento</option><option value="nie">DNI / NIE / TIE</option><option value="tramite">NIE provisional o en trámite</option><option value="pasaporte">Solo pasaporte</option></select>
         </label>
@@ -326,14 +346,17 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
         </label>
         <div class="field">¿Qué seguros quieres?</div>
         <div class="checks" id="f-seg"><label class="ck"><input type="checkbox" value="Seguro de salud"> <span>Seguro de salud</span></label><label class="ck"><input type="checkbox" value="Decesos con repatriación"> <span>Decesos con repatriación</span></label><label class="ck"><input type="checkbox" value="Seguro de vida"> <span>Seguro de vida</span></label><label class="ck"><input type="checkbox" value="Seguro de hogar"> <span>Seguro de hogar</span></label><label class="ck"><input type="checkbox" value="Seguro para negocio"> <span>Seguro para negocio</span></label><label class="ck"><input type="checkbox" value="Seguro de automóvil"> <span>Seguro de automóvil</span></label><label class="ck"><input type="checkbox" value="No lo sé, quiero asesoramiento"> <span>No lo sé, quiero asesoramiento</span></label></div>
+        </div>
+        <p class="muted" style="margin:14px 0 0">Solo necesitamos tus datos de contacto para enviarte el presupuesto.</p>
         <label class="field">Nombre<input id="f-nombre" autocomplete="name" placeholder="Tu nombre"></label>
-        <label class="field">Teléfono / WhatsApp<input id="f-tel" type="tel" autocomplete="tel" placeholder="+34 600 000 000"></label>
-        <label class="field">Mensaje (opcional)<textarea id="f-msg" placeholder="Cuéntanos qué necesitas"></textarea></label>
+        <label class="field">Teléfono<input id="f-tel" type="tel" autocomplete="tel" placeholder="+34 600 000 000"></label>
+        <label class="field">Email<input id="f-mail" type="email" autocomplete="email" placeholder="tu@email.com"></label>
         <label class="check"><input type="checkbox" id="f-ok"> Acepto que Nil Aznar, agente exclusivo de Occident, me contacte para darme información sobre seguros.</label>
         <p id="f-err" class="note warn" hidden></p>
-        <button class="btn" type="submit">Enviar por WhatsApp</button>
+        <p class="note ok" style="margin-top:14px"><b>Sin compromiso ninguno.</b> Te enviamos tu presupuesto y tú decides si quieres contratar.</p>
+        <button class="btn" type="submit">Contactar</button>
       </form>
-      <div id="sent" class="sent" hidden><b>¡Gracias! Te contactamos muy pronto.</b><span class="muted">Se ha abierto WhatsApp con tus datos. Pulsa enviar en WhatsApp para que nos llegue.</span><a class="btn ghost" id="wa-again" href="#" target="_blank" rel="noopener">Abrir WhatsApp otra vez</a></div>
+      <div id="sent" class="sent" hidden><b>¡Gracias! Te enviaremos tu presupuesto muy pronto.</b><span class="muted">Sin compromiso ninguno.</span></div>
     </div>
   </details>
 
@@ -383,10 +406,10 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
     note.hidden = false;
     if (v === 'nie') {
       note.className = 'note ok';
-      note.innerHTML = '<b>Puedes contratar todos los seguros.</b> Salud (con o sin copagos), decesos, vida, negocio, hogar y automóvil.';
+      note.innerHTML = '<b>Puedes contratar todos los seguros:</b> salud, decesos, vida, negocio, hogar y automóvil.';
     } else {
       note.className = 'note warn';
-      note.innerHTML = '<b>Ahora puedes contratar el seguro de salud sin copagos.</b> Con tu pasaporte, autorización de residencia o NIE provisional. Tendrás que presentar el NIE en un plazo máximo de 4 meses. Cuando tengas el NIE podrás contratar el resto de seguros.';
+      note.innerHTML = '<b>Ahora puedes contratar el seguro de salud sin copagos</b> y tienes 4 meses para presentar el NIE. Cuando tengas el NIE podrás contratar el resto de seguros.';
     }
   }
   docSel.addEventListener('change', function () {
@@ -399,15 +422,16 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
     saludsin: [800, 950, 1300, 1900, 2800],            /* €/año por persona */
     cop: { 0: [45, 55, 75, 110, 160], 5: [38, 46, 62, 92, 135], 20: [25, 30, 42, 65, 95] }, /* €/mes por persona */
     decesos: [6, 9, 14, 22, 35],                       /* €/mes por persona */
-    vida: [8, 12, 22, 45, null],                       /* €/mes por cada 30.000 € */
+    vida: [8, 12, 22, 45, 80],                         /* €/mes por cada 30.000 € */
     hogar: 12, negocio: 25,                            /* desde €/mes */
     auto: { t: 30, ta: 45, tr: 75 }                    /* desde €/mes */
   };
   var ZONA = { 'Marruecos': 1, 'Argelia': 1, 'Rumanía': 1, 'Ucrania': 1.1, 'Senegal': 1.5, 'Gambia': 1.5, 'Mali': 1.5, 'Nigeria': 1.5, 'Pakistán': 1.5, 'India': 1.5, 'China': 1.5, 'Otro país': 1.5 };
-  var NAME = { saludsin: 'Seguro de salud', salud: 'Seguro de salud', decesos: 'Decesos con repatriación', vida: 'Seguro de vida', hogar: 'Seguro de hogar', negocio: 'Seguro para negocio', auto: 'Seguro de automóvil' };
   var cD = $('c-doc'), cE = $('c-edad'), cP = $('c-pers'), opts = document.querySelectorAll('#c-opts .opt');
+  var pick = {}, current = [];
   function fmt(n) { return Math.round(n).toLocaleString('es-ES'); }
   function cpOk(id) { return /^\d{5}$/.test($(id).value.trim()); }
+  function txt(sel) { return sel.value === '' ? '' : sel.options[sel.selectedIndex].text; }
   function renderCalc() {
     var d = cD.value, e = cE.value, n = +cP.value, sinNie = d === 'tramite' || d === 'pasaporte';
     var ready = d && e !== '';
@@ -419,56 +443,65 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
       if (!show) cb.checked = false;
       o.classList.toggle('sel', cb.checked);
     });
-    if (!ready) { $('c-res').hidden = true; return; }
-    var a = +e, lines = [], total = 0, totalOk = true;
-    function add(label, price, unit, extra) {
-      if (price == null) { lines.push('<div class="line"><span>' + label + '</span><b style="font-size:14px">Consúltanos</b></div>'); return; }
-      lines.push('<div class="line"><span>' + label + (extra || '') + '</span><b>desde ' + fmt(price) + ' € <small>/ ' + unit + '</small></b></div>');
-      if (unit === 'mes') total += price; else totalOk = false;
+    current = [];
+    if (ready) {
+      var a = +e, per = n > 1 ? ' (' + n + ' personas)' : '';
+      var on = function (k) { var o = document.querySelector('.opt[data-k="' + k + '"]'); return !o.hidden && o.querySelector('input').checked; };
+      var box = function (k, html) { var b = document.querySelector('.pbox[data-p="' + k + '"]'); if (b) b.innerHTML = html; };
+      var item = function (k, name, label, price, unit) {
+        current.push({ k: k, name: name, label: label, price: price, unit: unit });
+        return '<b>Precio aproximado: desde ' + fmt(price) + ' €/' + unit + '</b>' + (n > 1 && /salud|decesos/.test(k) ? ' para ' + n + ' personas' : '');
+      };
+      if (on('saludsin')) box('saludsin', item('saludsin', 'Seguro de salud', 'Salud sin copagos' + per, T.saludsin[a] * n, 'año') + '<br><small class="muted">Pago anual.</small>');
+      if (on('salud')) {
+        var c = document.querySelector('input[name=cop]:checked').value, x = T.cop[c][a];
+        var h = item('salud', 'Seguro de salud', 'Salud · Copago ' + c + per, x * n, 'mes') + '<br>';
+        if (c === '0') h += 'Copago 0 (sin copagos): seguro completo. Pagas ' + fmt(x) + ' €/mes y nada más, vayas al médico las veces que vayas.';
+        else h += (c === '20' ? '<b>Copago 20: el más económico y el que te recomendamos.</b> ' : 'Copago 5: ') +
+          'Pagas una cuota fija de ' + fmt(x) + ' €/mes + ' + c + ' € por cada visita o prueba, que se te cargan a final de mes en el recibo.<br>' +
+          'Si no vas al médico: <b>' + fmt(x) + ' €</b>. Si vas una vez: ' + fmt(x) + ' + ' + c + ' = <b>' + fmt(x + +c) + ' €</b>. Si vas dos veces: ' + fmt(x) + ' + ' + c + ' + ' + c + ' = <b>' + fmt(x + 2 * c) + ' €</b>.' +
+          '<br><small class="muted">Cada ' + c + ' € incluye visitas y pruebas. Precio por persona.</small>';
+        box('salud', h);
+      }
+      if (on('decesos')) { var p = $('c-pais').value; box('decesos', item('decesos', 'Decesos con repatriación', 'Decesos con repatriación a ' + p + per, T.decesos[a] * (ZONA[p] || 1.3) * n, 'mes')); }
+      if (on('vida')) { var cap = +$('c-cap').value; box('vida', item('vida', 'Seguro de vida', 'Vida · ' + fmt(cap) + ' €', T.vida[a] * cap / 30000, 'mes')); }
+      if (on('hogar')) box('hogar', cpOk('c-cp-hogar') ? item('hogar', 'Seguro de hogar', 'Hogar · CP ' + $('c-cp-hogar').value.trim(), T.hogar, 'mes') : 'Escribe el código postal para ver el precio.');
+      if (on('negocio')) box('negocio', cpOk('c-cp-neg') ? item('negocio', 'Seguro para negocio', 'Negocio · CP ' + $('c-cp-neg').value.trim(), T.negocio, 'mes') : 'Escribe el código postal para ver el precio.');
+      if (on('auto')) { var t = $('c-auto'); box('auto', item('auto', 'Seguro de automóvil', 'Automóvil · ' + txt(t), T.auto[t.value] * (a === 0 ? 1.5 : 1), 'mes')); }
     }
-    var per = n > 1 ? ' (' + n + ' personas)' : '';
-    var sel = function (k) { var o = document.querySelector('.opt[data-k="' + k + '"]'); return !o.hidden && o.querySelector('input').checked; };
-    if (sel('saludsin')) add('Seguro de salud sin copagos', T.saludsin[a] * n, 'año', per);
-    if (sel('salud')) {
-      var c = document.querySelector('input[name=cop]:checked').value, x = T.cop[c][a];
-      add('Seguro de salud · Copago ' + c, x * n, 'mes', per);
-      var info = $('cop-info');
-      if (c === '0') info.innerHTML = '<b>Copago 0 (sin copagos):</b> seguro completo. Pagas ' + fmt(x) + ' €/mes y nada más, vayas al médico las veces que vayas.';
-      else info.innerHTML = (c === '20' ? '<b>Copago 20: el más económico y el que te recomendamos.</b> ' : '<b>Copago 5:</b> ') +
-        'Pagas una cuota fija de ' + fmt(x) + ' €/mes + ' + c + ' € por cada visita o prueba, que se te cargan a final de mes en el recibo.<br>' +
-        'Si no vas al médico: <b>' + fmt(x) + ' €</b>. Si vas una vez: ' + fmt(x) + ' + ' + c + ' = <b>' + fmt(x + +c) + ' €</b>. Si vas dos veces: ' + fmt(x) + ' + ' + c + ' + ' + c + ' = <b>' + fmt(x + 2 * c) + ' €</b>.' +
-        '<br><small class="muted">Cada ' + c + ' € incluye visitas y pruebas. Precio por persona.</small>';
-    }
-    if (sel('decesos')) { var p = $('c-pais').value; add('Decesos con repatriación a ' + p, T.decesos[a] * (ZONA[p] || 1.3) * n, 'mes', per); }
-    if (sel('vida')) { var cap = +$('c-cap').value; add('Seguro de vida · ' + fmt(cap) + ' €', T.vida[a] == null ? null : T.vida[a] * cap / 30000, 'mes'); }
-    if (sel('hogar')) { if (cpOk('c-cp-hogar')) add('Seguro de hogar · CP ' + $('c-cp-hogar').value.trim(), T.hogar, 'mes'); else lines.push('<div class="line"><span>Seguro de hogar</span><span class="muted">Escribe el código postal</span></div>'); }
-    if (sel('negocio')) { if (cpOk('c-cp-neg')) add('Seguro para negocio · CP ' + $('c-cp-neg').value.trim(), T.negocio, 'mes'); else lines.push('<div class="line"><span>Seguro para negocio</span><span class="muted">Escribe el código postal</span></div>'); }
-    if (sel('auto')) { var t = $('c-auto'); add('Seguro de automóvil · ' + t.options[t.selectedIndex].text, T.auto[t.value] * (a === 0 ? 1.5 : 1), 'mes'); }
-    var priced = lines.filter(function (l) { return l.indexOf('desde') > -1; }).length;
-    if (priced > 1 && totalOk) lines.push('<div class="line total"><span><b style="color:inherit;font-size:15px">Total</b></span><b>desde ' + fmt(total) + ' € <small>/ mes</small></b></div>');
-    $('c-res').hidden = !lines.length;
-    $('r-lines').innerHTML = lines.join('');
+    $('paso2').hidden = !current.length;
+    var html = '', total = 0, annual = 0, count = 0;
+    current.forEach(function (it) {
+      if (pick[it.k] === undefined) pick[it.k] = true;
+      var ok = pick[it.k];
+      if (ok) { count++; if (it.unit === 'mes') total += it.price; else annual += it.price; }
+      html += '<label class="line pick"><input type="checkbox" data-k="' + it.k + '"' + (ok ? ' checked' : '') + '><span>' + it.label + '</span><b>' + fmt(it.price) + ' € <small>/ ' + it.unit + '</small></b></label>';
+    });
+    if (count) html += '<div class="line total"><span><b style="color:inherit;font-size:15px">Total</b></span><b>' + (total ? fmt(total) + ' € <small>/ mes</small>' : '') + (total && annual ? '<br>' : '') + (annual ? fmt(annual) + ' € <small>/ año</small>' : '') + '</b></div>';
+    $('r-lines').innerHTML = html;
+    syncForm();
   }
-  document.getElementById('calc').addEventListener('change', renderCalc);
-  document.getElementById('calc').addEventListener('input', function (ev) { if (ev.target.tagName === 'INPUT' && ev.target.inputMode === 'numeric') renderCalc(); });
-  cD.addEventListener('change', function () { $('f-doc').value = cD.value; });
-  cE.addEventListener('change', function () { $('f-edad').value = cE.value; });
+  $('r-lines').addEventListener('change', function (ev) { var k = ev.target.dataset.k; if (k) { pick[k] = ev.target.checked; renderCalc(); } });
+  document.getElementById('c-opts').addEventListener('change', function (ev) { var o = ev.target.closest('.opt'); if (o && ev.target === o.querySelector('input[type=checkbox]')) pick[o.dataset.k] = ev.target.checked; renderCalc(); });
+  document.getElementById('c-opts').addEventListener('input', function (ev) { if (ev.target.inputMode === 'numeric') renderCalc(); });
+  [cD, cE, cP].forEach(function (el) { el.addEventListener('change', renderCalc); });
+
+  /* Lo elegido en la calculadora pasa al formulario */
+  function chosen() { return current.filter(function (it) { return pick[it.k]; }); }
+  function syncForm() {
+    var ch = chosen();
+    $('f-calc').hidden = !ch.length; $('f-manual').hidden = !!ch.length;
+    if (!ch.length) return;
+    $('f-calc-body').innerHTML = 'Documento: <b>' + txt(cD) + '</b><br>Edad: <b>' + txt(cE) + '</b>' + (+cP.value > 1 ? '<br>Personas: <b>' + cP.value + '</b>' : '') +
+      '<ul>' + ch.map(function (it) { return '<li>' + it.label + ': desde ' + fmt(it.price) + ' €/' + it.unit + '</li>'; }).join('') + '</ul>';
+  }
   renderCalc();
 
   /* Ir al formulario */
   function goForm() { $('contacto').open = true; $('contacto').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   $('fab').addEventListener('click', goForm);
-  $('c-go').addEventListener('click', function (e) {
-    e.preventDefault();
-    if (cD.value) $('f-doc').value = cD.value;
-    if (cE.value !== '') $('f-edad').value = cE.value;
-    opts.forEach(function (o) {
-      if (o.hidden || !o.querySelector('input').checked) return;
-      var name = NAME[o.dataset.k];
-      document.querySelectorAll('#f-seg input').forEach(function (i) { if (i.value === name) i.checked = true; });
-    });
-    goForm();
-  });
+  $('c-go').addEventListener('click', goForm);
+  $('f-edit').addEventListener('click', function (e) { e.preventDefault(); $('calc').open = true; $('calc').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
   /* Valoraciones (simulado) */
   var stars = document.querySelectorAll('#stars button'), rating = 0;
@@ -480,29 +513,19 @@ details[open] > summary .plus::after { transform:translate(-50%,-50%) rotate(0de
     window.location.href = 'https://wa.me/34659706974?text=' + encodeURIComponent(t);
   });
 
-  /* Formulario (simulado) */
+  /* Formulario */
   $('form').addEventListener('submit', function (e) {
     e.preventDefault();
-    var err = [];
+    var err = [], manual = !$('f-manual').hidden;
     if (!$('f-nombre').value.trim()) err.push('tu nombre');
     if ($('f-tel').value.replace(/\D/g, '').length < 9) err.push('un teléfono válido');
-    if (!document.querySelector('#f-seg input:checked')) err.push('elegir al menos un seguro');
-    if (!$('f-edad').value) err.push('tu edad');
-    if (!$('f-ok').checked) err.push('aceptar que te contacte');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('f-mail').value.trim())) err.push('un email válido');
+    if (manual && !document.querySelector('#f-seg input:checked')) err.push('elegir al menos un seguro');
+    if (manual && !$('f-edad').value) err.push('tu edad');
+    if (!$('f-ok').checked) err.push('aceptar que te contactemos');
     if (err.length) { $('f-err').hidden = false; $('f-err').textContent = 'Falta ' + err.join(', ') + '.'; return; }
-    var sel = function (id) { var o = $(id); return o.value === '' ? '-' : o.options[o.selectedIndex].text; };
-    var seg = [].map.call(document.querySelectorAll('#f-seg input:checked'), function (i) { return i.value; }).join(', ');
-    var txt = 'Hola Nil, vengo de Extranjería App y quiero un presupuesto.\n\n' +
-      'Nombre: ' + $('f-nombre').value.trim() + '\n' +
-      'Teléfono: ' + $('f-tel').value.trim() + '\n' +
-      'Documento: ' + sel('f-doc') + '\n' +
-      'Edad: ' + sel('f-edad') + '\n' +
-      'Seguros: ' + seg +
-      ($('f-msg').value.trim() ? '\nMensaje: ' + $('f-msg').value.trim() : '');
-    var url = 'https://wa.me/34659706974?text=' + encodeURIComponent(txt);
-    $('wa-again').href = url;
+    $('f-err').hidden = true;
     $('form').hidden = true; $('sent').hidden = false;
-    window.location.href = url;
   });
 })();
 </script>
